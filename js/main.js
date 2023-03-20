@@ -129,13 +129,13 @@ const contenedor_carrito = document.getElementById("contenedor_carrito");
 listaProductos.forEach( producto => {
   contenedor_productos.innerHTML += ` 
     
-    <div class="card" style="width: 18rem; margin-top: 50px; margin-bottom: 40px;">
+    <div class="card" style="width: 18rem; margin-top: 30px; margin-bottom: 10px;">
         <img src="https://img.freepik.com/foto-gratis/dispositivo-vapeo_144627-25441.jpg?w=740&t=st=1679245798~exp=1679246398~hmac=c42dcf10529b5e980e75e884b0aeb57a79ce3d2cc508b7718692dc0e2148cbf6" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${producto.nombre}</h5>
             <p class="card-text">${producto.descripcion}</p>
-            <p class="card-text">${producto.precio}</p>
-            <a href="#" class="btn btn-primary" id="vaper${producto.id}">Añadir al carrito</a>
+            <p class="card-text">$${producto.precio}</p>
+            <a href="#" class="btn btn-primary prevent-default" id="vaper${producto.id}">Añadir al carrito</a>
         </div>
     </div>
     
@@ -166,10 +166,9 @@ listaProductos.forEach( producto => {
              </div>
              <div class="col-md-8">
                  <div class="card-body">
-                     <h5 class="card-title">Card title</h5>
-                     <p class="card-text">This is a wider card with supporting text below as a natural
-                         lead-in to additional content. This content is a little bit longer.</p>
-                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                     <h5 class="card-title">${producto.nombre}</h5>
+                     <p class="card-text">${producto.descripcion}</p>
+                     <p class="card-text">$${producto.precio}</p>
                  </div>
              </div>
          </div>
