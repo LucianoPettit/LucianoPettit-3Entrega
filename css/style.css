@@ -1,0 +1,139 @@
+/* imports */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;1,700&display=swap");
+
+/* fin de imports */
+
+/* reset de pagina */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Raleway", sans-serif;
+}
+/* fin de reset */
+
+/* root (paleta de colores)*/
+:root {
+  --blanco: white;
+  --negro: black;
+  --primario: #e55224;
+  --secundario: #d86542;
+  --terciario: #24262b;
+}
+/* fin del root (paleta de colores)*/
+
+/* body/html */
+html,
+body {
+  background: white;
+}
+/* fin del body/html */
+
+.navbar {
+    background-color: rgb(255, 117, 117);
+}
+
+.btn1{
+    background-color: green;
+    padding: 3px;
+    border: 1px solid black;
+    color: white;
+}
+
+.btn2{
+    background-color: red;
+    padding: 3px;
+    border: 1px solid black;
+    color: white;
+}
+
+::selection {
+    background-color: white;
+    color: black;
+  }
+  /* heder nav*/
+  
+  .links {
+    display: flex;
+    justify-content: end;
+  }
+  .leftContent {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar-brand {
+    font-size: 30px;
+    color: white;
+    margin-left: 30px;
+    font-weight: bold;
+    z-index: 10;
+  }
+  .navbar-brand:hover {
+    color: #e74f1d;
+    z-index: 10;
+  }
+  #navbarText {
+    font-size: 18px;
+    color: var(--primario);
+    margin-right: 30px;
+  }
+  .nav-item:active {
+    color:white;
+  }
+  .nav-link:hover {
+    color: #e74f1d;
+  }
+  .nav-link {
+    color: white;
+    font-size: 20px;
+    z-index: 10;
+  }
+  .navbar {
+    background-color: transparent !important;
+    z-index: 10;
+  }
+  .navbar-nav {
+    z-index: 10;
+  }
+  .nav-item {
+    font-size: 35px;
+    z-index: 10;
+  }
+  .custom-class {
+    background-color: #ffffff;
+  }
+
+header{
+    text-align: center;
+    background-image: linear-gradient(390deg, #ffffff2a, rgba(0, 0, 0, 0.812)),
+      url("../img/hombre-vaping-cigarrillo-electronico.jpg");
+    width: auto;
+    height: 80vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: center;
+    background-attachment: fixed;
+  }
+
+  .texthero {
+    color: white;
+    width: 100%;
+  }
+
+  .texthero div{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+  }
+  .texthero p{
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+  }
+
