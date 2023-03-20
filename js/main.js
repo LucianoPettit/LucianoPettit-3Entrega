@@ -135,48 +135,49 @@ listaProductos.forEach( producto => {
             <h5 class="card-title">${producto.nombre}</h5>
             <p class="card-text">${producto.descripcion}</p>
             <p class="card-text">${producto.precio}</p>
-            <a href="#" class="btn btn-primary id=vaper${producto.id}">Añadir al carrito</a>
+            <a href="#" class="btn btn-primary" id="vaper${producto.id}">Añadir al carrito</a>
         </div>
     </div>
     
-    `;
-});
+    `
+})
 
 
 
-listaProductos.forEach( producto => {   
+ listaProductos.forEach( producto => {   
     const productoEnEsperaDeSerAnadido = document.getElementById(`vaper${producto.id}`)
 
 
     productoEnEsperaDeSerAnadido.addEventListener("click",()=>{
-        listaCarrito.push(producto)
+      
+         listaCarrito.push(producto)
 
-        //eliminamos todo
+         //eliminamos todo
     contenedor_carrito.innerHTML = ""
-    //mostramos todo
-    listaCarrito.forEach( producto => { 
+     //mostramos tod     
+     
+     listaCarrito.forEach( producto => { 
 
-        contenedor_carrito.innerHTML += `
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="https://img.freepik.com/foto-gratis/dispositivo-vapeo_144627-25441.jpg?w=740&t=st=1679245798~exp=1679246398~hmac=c42dcf10529b5e980e75e884b0aeb57a79ce3d2cc508b7718692dc0e2148cbf6" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    `
+         contenedor_carrito.innerHTML += `
+     <div class="card mb-3" style="max-width: 540px;">
+         <div class="row g-0">
+             <div class="col-md-4">
+                 <img src="https://img.freepik.com/foto-gratis/dispositivo-vapeo_144627-25441.jpg?w=740&t=st=1679245798~exp=1679246398~hmac=c42dcf10529b5e980e75e884b0aeb57a79ce3d2cc508b7718692dc0e2148cbf6" class="img-fluid rounded-start" alt="...">
+             </div>
+             <div class="col-md-8">
+                 <div class="card-body">
+                     <h5 class="card-title">Card title</h5>
+                     <p class="card-text">This is a wider card with supporting text below as a natural
+                         lead-in to additional content. This content is a little bit longer.</p>
+                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                 </div>
+             </div>
+         </div>
+     </div>
+     `
+     })
 
-    })
 
-
-    })
+ })
 
 })
