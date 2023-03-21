@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 
 <body>
     <header>
@@ -33,7 +34,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./pages/carga_productos.html">cargar productos </a>
+                            <a class="nav-link" href="#">Beneficios </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -79,68 +80,23 @@
             </div>
         </section>
     </header>
-    <main>
 
-        <section class="container d-flex flex-wrap justify-content-center gap-5" id="contenedor_productos">
-            <!--CARD BOOTSTRAP-->
-            <!-- <div class="card" style="width: 18rem; margin-top: 50px; margin-bottom: 40px;">
-                <img src="https://img.freepik.com/foto-gratis/dispositivo-vapeo_144627-25441.jpg?w=740&t=st=1679245798~exp=1679246398~hmac=c42dcf10529b5e980e75e884b0aeb57a79ce3d2cc508b7718692dc0e2148cbf6" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary prevent-default">Go somewhere</a>
-                </div>
-              </div>  -->
-        </section>
-    </main>
+    <div>
+        <!--delegacion de eventos-->
+        <form class="container-fluid d-flex flex-column" id="formulario">
 
+            <input class="row" type="number" id="id" placeholder="id" required>
+            <input class="row" type="text" id="nombre" placeholder="nombre" required>
+            <input class="row" type="number" id="precio" placeholder="precio" required>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="exampleModalLabel">Carrito de compra</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="contenedor_carrito">
-
-                    <!--CARD HORIZONTAL BOOTSTRAP-->
-                    
-                    <!--div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="https://http2.mlstatic.com/D_NQ_NP_659520-MLM51338788281_082022-O.webp" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div-->
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Seguir Comprando</button>
-                    <button type="button" class="btn btn-danger">Finalizar Compra</button>
-                </div>
-            </div>
-        </div>
+            <input type="submit" value="Cargar Producto">
+        </form>
     </div>
 
-
-
-
-
+    <script src="../js/cargaProductos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-    <script src="./js/main.js"></script>
-
 </body>
 
 </html>
