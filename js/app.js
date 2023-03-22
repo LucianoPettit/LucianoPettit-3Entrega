@@ -78,15 +78,25 @@ class CarritoController {
                             <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
                             <p class="card-text">${producto.descripcion}</p>
                             <p class="card-text">$${producto.precio}</p>
-                            <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>              
+                            <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             `;
+            document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
+              // borramos el producto de this.listaProductos
+             this.borrar(producto)
+            //  actualizamos el storage
+             localStorage.setItem("listaCarrito", JSON.stringify(this.listaCarrito))
+            // actualizamos el dom
+            this.mostrarEnDOM(contenedor_carrito)
+          } )
+      document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
+        this.borrar(producto);
+      });
     });
   }
-
  
 
   limpiar(){
