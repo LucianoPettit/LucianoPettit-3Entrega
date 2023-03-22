@@ -12,9 +12,9 @@ class ProductoController{
     }
     
     mostrarEnDOM(contenedor_productos){
-        //limpio
+        //limpio el dom 
         contenedor_productos.innerHTML = ""
-        //muestro toda la lista
+        //muestra  la lista completa
         this.listaProductos.forEach( producto => {
             contenedor_productos.innerHTML += `
             <div class="card" style="width: 18rem;">
@@ -25,7 +25,7 @@ class ProductoController{
                         ${producto.descripcion}
                     </p>
                     <p class="card-text">
-                        ${producto.precio}
+                        $${producto.precio}
                     </p>
                     <a href="#" class="btn btn-primary" id="cpu${producto.id}">Añadir al carrito</a>
                 </div>
@@ -55,9 +55,9 @@ class CarritoController{
     }
 
     mostrarEnDOM(contenedor_carrito){
-        //limpio el contenedor
+        //limpio el container
         contenedor_carrito.innerHTML = ""
-        //muestro todo
+        //muestro todo 
         this.listaCarrito.forEach( producto => {
             contenedor_carrito.innerHTML += `
             <div class="card mb-3" style="max-width: 540px;">
@@ -70,6 +70,7 @@ class CarritoController{
                             <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
                             <p class="card-text">${producto.descripcion}</p>
                             <p class="card-text">$${producto.precio}</p>
+                           
                             
                         </div>
                     </div>
