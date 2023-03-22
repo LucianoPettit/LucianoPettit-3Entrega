@@ -40,6 +40,13 @@ class CarritoController {
     this.listaCarrito = [];
   }
 
+ borrar(producto){
+
+  let indice = this.listaCarrito.indexOf(producto)
+  this.listaCarrito.splice(indice,1)
+
+ }
+
   levantar() {
     let obtenerListaJSON = localStorage.getItem("listaCarrito");
 
@@ -49,6 +56,7 @@ class CarritoController {
   }
 
   anadir(producto) {
+
     this.listaCarrito.push(producto);
     let arrFormatoJSON = JSON.stringify(this.listaCarrito);
     localStorage.setItem("listaCarrito", arrFormatoJSON);
@@ -69,7 +77,10 @@ class CarritoController {
                         <div class="card-body">
                             <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
                             <p class="card-text">${producto.descripcion}</p>
+                          
                             <p class="card-text">$${producto.precio}</p>
+                            <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
+
                            
                             
                         </div>
@@ -80,12 +91,24 @@ class CarritoController {
     });
   }
 
+ 
+
   limpiar(){
     this.listaCarrito = []
     localStorage.removeItem("listaCarrito")
 
 
+    this.listaCarrito.forEach( producto => {
 
+        document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
+            // borramos el producto de this.listaProductos
+           this.borrar(producto)
+          //  actualizamos el storage
+           localStorage.setItem("listaCarrito", JSON.stringify(this.listaCarrito))
+          // actualizamos el dom
+          this.mostrarEnDOM(contenedor_carrito)
+        } )
+    })
   }
 }
 
@@ -132,6 +155,7 @@ controladorProductos.listaProductos.forEach((producto) => {
 
 finalizar_compra.addEventListener("click", () => {
     
+   
 
     if(controladorCarrito.listaCarrito.length > 0 ){
     controladorCarrito.limpiar()
@@ -155,6 +179,14 @@ finalizar_compra.addEventListener("click", () => {
       });
 }
 
+
+controladorCarrito.listaCarrito.forEach(producto =>{
+
+  if(producto.cantidad <= producto.stock){
+    producto.stock = producto.stock - producto.cantidad
+  }
+})
+  
 
 
     
