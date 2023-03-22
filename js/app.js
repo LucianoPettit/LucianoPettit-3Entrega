@@ -77,12 +77,8 @@ class CarritoController {
                         <div class="card-body">
                             <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
                             <p class="card-text">${producto.descripcion}</p>
-                          
                             <p class="card-text">$${producto.precio}</p>
-                            <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
-
-                           
-                            
+                            <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>              
                         </div>
                     </div>
                 </div>
