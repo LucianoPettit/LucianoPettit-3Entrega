@@ -191,6 +191,7 @@ controladorCarrito.listaCarrito.forEach(producto =>{
   if(producto.cantidad <= producto.stock){
     producto.stock = producto.stock - producto.cantidad
   }
+  
 })
   
 
