@@ -8,7 +8,9 @@ class ProductoController {
 
     if (obtenerListaJSON) {
       this.listaProductos = JSON.parse(obtenerListaJSON);
+      return true
     }
+    return false 
   }
 
   mostrarEnDOM(contenedor_productos) {
@@ -27,7 +29,7 @@ class ProductoController {
                     <p class="card-text">
                         $${producto.precio}
                     </p>
-                    <a href="#" class="btn btn-primary" id="cpu${producto.id}">Añadir al carrito</a>
+                    <a href="#" class="btn btn-primary" id="vaper${producto.id}">Añadir al carrito</a>
                 </div>
             </div>
             `;
@@ -56,8 +58,18 @@ class CarritoController {
   }
 
   anadir(producto) {
+  let existeProducto = this.listaCarrito.some(elemento => elemento.id == producto.id ) 
 
-    this.listaCarrito.push(producto);
+    if (existeProducto){
+
+      const productoEncontrado = this.buscar(producto.id)
+      productoEncontrado.cantidad += 1
+    }
+    else{
+      this.listaCarrito.push(producto);
+
+    }
+
     let arrFormatoJSON = JSON.stringify(this.listaCarrito);
     localStorage.setItem("listaCarrito", arrFormatoJSON);
   }
@@ -77,6 +89,7 @@ class CarritoController {
                         <div class="card-body">
                             <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
                             <p class="card-text">${producto.descripcion}</p>
+                            <p class="card-text">cantidad: x ${producto.cantidad} unidades</p>
                             <p class="card-text">$${producto.precio}</p>
                             <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
                         </div>
@@ -98,6 +111,26 @@ class CarritoController {
     });
   }
  
+mostrarPreciosEnDOM(precio, precio_con_iva){
+ precio.innerHTML = this.calcularTotal()
+ precio_con_iva.innerHTML = this.calcularPrecioConIva()
+  
+}
+
+  calcularTotal(){
+   return this.listaCarrito.reduce((acumulador,producto)=> acumulador + producto.precio * producto.cantidad ,0)
+  }
+
+
+
+    calcularPrecioConIva(){
+   return this.calcularTotal() * 1.21
+    }
+ 
+
+    buscar(id){
+    return this.listaCarrito.find(producto => producto.id == id)
+    }
 
   limpiar(){
     this.listaCarrito = []
@@ -124,28 +157,44 @@ const controladorCarrito = new CarritoController();
 
 //Verificar STORAGE
 controladorProductos.levantar();
-controladorCarrito.levantar();
+const levantoAlgo = controladorCarrito.levantar();
+
+
 
 //DOM
 const contenedor_productos = document.getElementById("contenedor_productos");
 const contenedor_carrito = document.getElementById("contenedor_carrito");
 const finalizar_compra = document.getElementById("finalizar_compra");
 const vaciar_carrito = document.getElementById("vaciar_carrito");
+const precio = document.getElementById("precio");
+const precio_con_iva= document.getElementById("precio_con_iva");
+
+
+
+if (levantoAlgo){
+
+  controladorCarrito.mostrarPreciosEnDOM(precio,precio_con_iva)
+}
+
 
 //APP JS
 controladorProductos.mostrarEnDOM(contenedor_productos);
 controladorCarrito.mostrarEnDOM(contenedor_carrito);
 
 //Añadimos Eventos a los botones de cada CARD
+
 controladorProductos.listaProductos.forEach((producto) => {
-  const productoEnEsperaDeSerAnadido = document.getElementById(
-    `cpu${producto.id}`
-  );
+  const productoEnEsperaDeSerAnadido = document.getElementById(`vaper${producto.id}`);
 
   productoEnEsperaDeSerAnadido.addEventListener("click", () => {
+
     controladorCarrito.anadir(producto);
+
     controladorCarrito.levantar();
+
     controladorCarrito.mostrarEnDOM(contenedor_carrito);
+    controladorCarrito.mostrarPreciosEnDOM(precio, precio_con_iva);
+
     Toastify({
         text: "Producto añadido con éxito",
         duration: 3000,
@@ -166,7 +215,7 @@ finalizar_compra.addEventListener("click", () => {
     if(controladorCarrito.listaCarrito.length > 0 ){
     controladorCarrito.limpiar()
     controladorCarrito.mostrarEnDOM(contenedor_carrito)
-     
+     controladorCarrito.mostrarPreciosEnDOM(precio,precio_con_iva)
 
   Swal.fire({
     position: "top-end",
@@ -186,14 +235,7 @@ finalizar_compra.addEventListener("click", () => {
 }
 
 
-controladorCarrito.listaCarrito.forEach(producto =>{
 
-  if(producto.cantidad <= producto.stock){
-    producto.stock = producto.stock - producto.cantidad
-  }
-  
-})
-  
 
 
     
