@@ -40,6 +40,10 @@ class ProductoController {
 class CarritoController {
   constructor() {
     this.listaCarrito = [];
+    this.contenedor_carrito = document.getElementById("contenedor_carrito"),
+    this.precio = document.getElementById("precio"),
+    this.precio_con_iva = document.getElementById("precio_con_iva")
+                        
   }
 
  borrar(producto){
@@ -74,46 +78,61 @@ class CarritoController {
     localStorage.setItem("listaCarrito", arrFormatoJSON);
   }
 
-  mostrarEnDOM(contenedor_carrito) {
+cardHTML(Producto){
+  return `
+  <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+          <div class="col-md-4">
+              <img src="${producto.img}" class="img-fluid rounded-start" alt="${producto.alt}">
+          </div>
+          <div class="col-md-8">
+              <div class="card-body">
+                  <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
+                  <p class="card-text">${producto.descripcion}</p>
+                  <p class="card-text">cantidad: x ${producto.cantidad} unidades</p>
+                  <p class="card-text">$${producto.precio}</p>
+                  <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
+              </div>
+          </div>
+      </div>
+  </div>
+  `
+}
+ limpiarDOM (){
+  contenedor_carrito.innerHTML = "";
+ }
+
+
+  mostrarEnDOM() {
     //limpio el container
-    contenedor_carrito.innerHTML = "";
+   this.limpiarDOM()
+
+    this.darEventoBorrar()
+  }
+ 
+
+  darEventoBorrar(){
     //muestro todo
     this.listaCarrito.forEach((producto) => {
-      contenedor_carrito.innerHTML += `
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="${producto.img}" class="img-fluid rounded-start" alt="${producto.alt}">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
-                            <p class="card-text">${producto.descripcion}</p>
-                            <p class="card-text">cantidad: x ${producto.cantidad} unidades</p>
-                            <p class="card-text">$${producto.precio}</p>
-                            <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
+    this.contenedor_carrito.innerHTML += this.cardHTML(producto)
             document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
               // borramos el producto de this.listaProductos
              this.borrar(producto)
             //  actualizamos el storage
              localStorage.setItem("listaCarrito", JSON.stringify(this.listaCarrito))
             // actualizamos el dom
-            this.mostrarEnDOM(contenedor_carrito)
+            this.mostrarEnDOM()
+            this.mostrarPreciosEnDOM()
           } )
       document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
         this.borrar(producto);
       });
     });
   }
- 
-mostrarPreciosEnDOM(precio, precio_con_iva){
- precio.innerHTML = this.calcularTotal()
- precio_con_iva.innerHTML = this.calcularPrecioConIva()
+
+mostrarPreciosEnDOM(){
+ this.precio.innerHTML = this.calcularTotal()
+ this.precio_con_iva.innerHTML = this.calcularPrecioConIva()
   
 }
 
@@ -123,9 +142,15 @@ mostrarPreciosEnDOM(precio, precio_con_iva){
 
 
 
-    calcularPrecioConIva(){
-   return this.calcularTotal() * 1.21
-    }
+  //   calcularPrecioConIva(){
+  //  return this.calcularTotal() * 1.21
+  //   }
+
+  calcularPrecioConIva() {
+    const total = this.calcularTotal() * 1.21;
+    return Number(total.toFixed(3)); 
+  }
+  
  
 
     buscar(id){
@@ -162,13 +187,9 @@ const levantoAlgo = controladorCarrito.levantar();
 
 
 //DOM
-const contenedor_productos = document.getElementById("contenedor_productos");
-const contenedor_carrito = document.getElementById("contenedor_carrito");
+
 const finalizar_compra = document.getElementById("finalizar_compra");
 const vaciar_carrito = document.getElementById("vaciar_carrito");
-const precio = document.getElementById("precio");
-const precio_con_iva= document.getElementById("precio_con_iva");
-
 
 
 if (levantoAlgo){
@@ -184,9 +205,9 @@ controladorCarrito.mostrarEnDOM(contenedor_carrito);
 //Añadimos Eventos a los botones de cada CARD
 
 controladorProductos.listaProductos.forEach((producto) => {
-  const productoEnEsperaDeSerAnadido = document.getElementById(`vaper${producto.id}`);
+  const productoEnDOM = document.getElementById(`vaper${producto.id}`);
 
-  productoEnEsperaDeSerAnadido.addEventListener("click", () => {
+  productoEnDOM.addEventListener("click", () => {
 
     controladorCarrito.anadir(producto);
 
