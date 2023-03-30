@@ -456,5 +456,53 @@ header {
 
 .buttonTrash {
   padding: 5px;
-  background-color: rgba(255, 0, 0, 0.775);
+  background-color: rgba(110, 110, 110, 0.539);
+}
+
+.divPrecio{
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  color: white;
+  background-color: #007cb64c;
+  font-weight: bold;
+  padding:30px;
+  
+}
+
+.modal-body  {
+  background-color:white;
+}
+
+.modal-content{
+  background-image: linear-gradient(390deg, #ffffff1b, rgba(0, 0, 0, 0.812)),
+  url("../img/hombre-vaping-cigarrillo-electronico.jpg");
+}
+
+.modal-title{
+  color: white;
+  font-weight: bold;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  width: 10px;
+  height: auto;
+}
+
+.fixed img {
+  width: 40px;
+  height: auto;
+}
+.whatsappModal img{
+  width:30px ;
+  padding-bottom:10px ;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }

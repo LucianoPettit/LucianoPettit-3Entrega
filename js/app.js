@@ -40,7 +40,6 @@ class ProductoController {
 class CarritoController {
   constructor() {
     this.listaCarrito = [];
-    this.contenedor_carrito = document.getElementById("contenedor_carrito"),
     this.precio = document.getElementById("precio"),
     this.precio_con_iva = document.getElementById("precio_con_iva")
                         
@@ -58,6 +57,7 @@ class CarritoController {
 
     if (obtenerListaJSON) {
       this.listaCarrito = JSON.parse(obtenerListaJSON);
+
     }
   }
 
@@ -78,57 +78,45 @@ class CarritoController {
     localStorage.setItem("listaCarrito", arrFormatoJSON);
   }
 
-cardHTML(Producto){
-  return `
-  <div class="card mb-3" style="max-width: 540px;">
-      <div class="row g-0">
-          <div class="col-md-4">
-              <img src="${producto.img}" class="img-fluid rounded-start" alt="${producto.alt}">
-          </div>
-          <div class="col-md-8">
-              <div class="card-body">
-                  <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
-                  <p class="card-text">${producto.descripcion}</p>
-                  <p class="card-text">cantidad: x ${producto.cantidad} unidades</p>
-                  <p class="card-text">$${producto.precio}</p>
-                  <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
+
+mostrarEnDOM(contenedor_carrito) {
+  //limpio el container
+  contenedor_carrito.innerHTML = "";
+  //muestro todo
+  this.listaCarrito.forEach((producto) => {
+    contenedor_carrito.innerHTML += `
+          <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img src="${producto.img}" class="img-fluid rounded-start" alt="${producto.alt}">
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title font-weight-bolder border-bottom-0">${producto.nombre}</h5>
+                          <p class="card-text">${producto.descripcion}</p>
+                          <p class="card-text">cantidad: x ${producto.cantidad} unidades</p>
+                          <p class="card-text">$${producto.precio}</p>
+                          <button id="borrar${producto.id}" class="buttonTrash"><i class="fas fa-trash-alt"></i></button>
+                      </div>
+                  </div>
               </div>
           </div>
-      </div>
-  </div>
-  `
-}
- limpiarDOM (){
-  contenedor_carrito.innerHTML = "";
- }
-
-
-  mostrarEnDOM() {
-    //limpio el container
-   this.limpiarDOM()
-
-    this.darEventoBorrar()
-  }
- 
-
-  darEventoBorrar(){
-    //muestro todo
-    this.listaCarrito.forEach((producto) => {
-    this.contenedor_carrito.innerHTML += this.cardHTML(producto)
-            document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
-              // borramos el producto de this.listaProductos
-             this.borrar(producto)
-            //  actualizamos el storage
-             localStorage.setItem("listaCarrito", JSON.stringify(this.listaCarrito))
-            // actualizamos el dom
-            this.mostrarEnDOM()
-            this.mostrarPreciosEnDOM()
-          } )
-      document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
-        this.borrar(producto);
-      });
+          `;
+          document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
+            // borramos el producto de this.listaProductos
+           this.borrar(producto)
+          //  actualizamos el storage
+           localStorage.setItem("listaCarrito", JSON.stringify(this.listaCarrito))
+          // actualizamos el dom
+          this.mostrarEnDOM(contenedor_carrito)
+          this.mostrarPreciosEnDOM()
+        } )
+    document.getElementById(`borrar${producto.id}`).addEventListener("click", () => {
+      this.borrar(producto);
     });
-  }
+  });
+}
+
 
 mostrarPreciosEnDOM(){
  this.precio.innerHTML = this.calcularTotal()
@@ -148,7 +136,7 @@ mostrarPreciosEnDOM(){
 
   calcularPrecioConIva() {
     const total = this.calcularTotal() * 1.21;
-    return Number(total.toFixed(3)); 
+    return Number(total.toFixed()); 
   }
   
  
