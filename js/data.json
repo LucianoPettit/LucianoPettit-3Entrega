@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Oferta! ",
+    "descripcion": "comprando cualquier producto hasta el 15/05/2023 tenes un descuento del 60% y envio sin cargo! ",
+    "img": "https://www.dafont.com/forum/attach/orig/9/2/922342.png",
+    "alt": "Oferta"
+  },
+  {
+    "id": 2,
+    "nombre": "Si tu compra supera los $46000",
+    "descripcion":" llevas de regalo 3 e-liquids de 60ml del sabor que prefieras ! " ,
+    "img": "http://escritoconelalma.com/wp-content/uploads/2020/06/CapturaRGRA.jpg",
+    "alt": "de regalo 3 liquidos"
+  },
+  {
+    "id": 3,
+    "nombre": "Hasta 3 Cuotas sin interes, con mercado pago ",
+    "descripcion":"  hasta 3 cuotas sin interés!" ,
+    "img": "https://www.barlantravel.com/admin/uploads/noticias/banner_3cuotas_mobile.jpg",
+    "alt": "3 cuotas sin interes"
+  }
+]
