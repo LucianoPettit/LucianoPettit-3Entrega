@@ -16,8 +16,7 @@ fetch("../js/data.json")
     <p class="card-text">
         ${producto.descripcion}
     </p>
- 
-    <a href="#" class="btn btn-primary" id="vaper${producto.id}">visitar producto</a>
+
 </div>
 </div>
 
