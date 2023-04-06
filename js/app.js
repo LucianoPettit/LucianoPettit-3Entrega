@@ -8,9 +8,9 @@ class ProductoController {
 
     if (obtenerListaJSON) {
       this.listaProductos = JSON.parse(obtenerListaJSON);
-      return true;
+     
     }
-    return false;
+   
   }
 
   mostrarEnDOM(contenedor_productos) {
@@ -54,7 +54,9 @@ class CarritoController {
 
     if (obtenerListaJSON) {
       this.listaCarrito = JSON.parse(obtenerListaJSON);
+      return true
     }
+    return false
   }
 
   anadir(producto) {
@@ -119,8 +121,8 @@ class CarritoController {
   }
 
   mostrarPreciosEnDOM() {
-    this.precio.innerHTML = this.calcularTotal();
-    this.precio_con_iva.innerHTML = this.calcularPrecioConIva();
+    this.precio.innerHTML = "$"+this.calcularTotal();
+    this.precio_con_iva.innerHTML = "$"+this.calcularPrecioConIva();
   }
 
   calcularTotal() {
@@ -145,8 +147,8 @@ class CarritoController {
   }
 
   limpiar() {
-    this.listaCarrito = [];
     localStorage.removeItem("listaCarrito");
+    this.listaCarrito = [];
 
     this.listaCarrito.forEach((producto) => {
       document
@@ -173,6 +175,8 @@ const controladorCarrito = new CarritoController();
 //Verificar STORAGE
 controladorProductos.levantar();
 const levantoAlgo = controladorCarrito.levantar();
+
+
 
 //DOM
 
@@ -239,5 +243,6 @@ finalizar_compra.addEventListener("click", () => {
 vaciar_carrito.addEventListener("click", () => {
   controladorCarrito.limpiar();
   controladorCarrito.mostrarEnDOM(contenedor_carrito);
+  controladorCarrito.mostrarPreciosEnDOM(precio, precio_con_iva);
 });
 
